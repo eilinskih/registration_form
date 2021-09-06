@@ -4,16 +4,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>REGISTRATION</title>
 </head>
-<body><div class="registration">
+<body>
+    <div class="registration">
     <form action="">
-<input type="text">
-<input type="email" name="" id="">
-<input type="password" name="" id="">
-<input type="radio" name="male" id="">
-<input type="checkbox" name="accept" id="">
+        <h1 class="title">
+            Create a new account
+        </h1>
+        <div class="fields">
+<div class="registration_group">
+    <input class="registration_input" type="text" placeholder="Name">
+    <label for="" class="registration_label"><span><img src="./images/email-icon 1.svg" alt="email-icon" ></span></label>
+</div>
+<div class="registration_group">
+    <input class="registration_input" type="password" name="" id="" placeholder="Password">
+    <label for="" class="registration_label"><span><img src="./images/password-icon 1.svg" alt="password-icon"></span></label>
+</div>
+<div class="registration_group">
+       <div class="select-box">
+           <div class="options-container">
+               <div class="option">
+                   <input type="radio" class="radio" id="Ukraine" name="Country">
+                   <label for="Ukraine">Ukraine</label>
+               </div>
+               <div class="option">
+                <input type="radio" class="radio" id="Russia" name="Country">
+                <label for="Russia">Russia</label>
+            </div>
+            <div class="option">
+                <input type="radio" class="radio" id="Belarus" name="Country">
+                <label for="Belarus">Belarus</label>
+            </div>
+           </div>
+           <div class="selected">
+            Country
+         </div>
+       </div>
+</div>
+</div>
+<div class="buttons">
+<div class="registration_group">
+    <input class="registration_radio" type="radio" name="male" id="">
+    <label for="" class="registration_label">Male</label>
+</div>
+<div class="registration_group">
+    <input class="registration_radio" type="radio" name="male" id="">
+    <label for="" class="registration_label">Female</label>
+</div>
+<div class="registration_group">
+    <input class="registration_checkbox" type="checkbox" name="accept" id="">
+    <label for="" class="registration_label">Accept terms and conditions</label>
+</div>
+</div>
+<button class="registration_button">Sign up</button>
     </form>
 </div>
+<script src="./index.js"></script>
 </body>
 </html>
