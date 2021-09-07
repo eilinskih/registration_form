@@ -7,6 +7,8 @@ const password = document.getElementById('Password');
 const accept = document.getElementById('accept');
 const male = document.getElementById('male');
 const female = document.getElementById('female');
+const sex = document.getElementsByClassName('sex')[0];
+let data = {};
 
 
 function userNameValidate(userName, minLength) {
@@ -83,7 +85,6 @@ function acceptValidate(accept) {
     }
     document.getElementsByClassName("error-message-radio")[0].innerHTML = "";
     document.getElementsByClassName('buttons')[0].classList.remove("error");
-    btn.removeAttribute("disabled");
     return true;
 }
 
@@ -98,7 +99,7 @@ function validateFunc() {
             if (countryValidate(ukr, rus, bel)) {
                 if (sexValidate(male, female)) {
                     if (acceptValidate(accept)) {
-
+                        btn.removeAttribute("disabled");
                     }
                 }
             }
@@ -111,43 +112,39 @@ selected.addEventListener("click", () => {
 });
 
 optionList.forEach(option => {
-    option.addEventListener("click", () => {
-        selected.innerHTML = option.getElementsByTagName("label")[0].innerHTML;
-        optionsContainer.classList.remove("active");
+    option.addEventListener("click", (e) => {
         validateFunc();
+        let countrySelected = option.getElementsByTagName("input")[0].value;
+        selected.innerHTML = countrySelected;
+        optionsContainer.classList.remove("active");
+        data.country = countrySelected;
+        console.log(data)
     });
 });
+
+Array.from(sex.getElementsByClassName("registration_group")).forEach(sex => {
+    sex.addEventListener("click", (e) => {
+        validateFunc();
+        let sexSelected = sex.getElementsByTagName("input")[0].value;
+        selected.innerHTML = sexSelected;
+        data.sex = sexSelected;
+        console.log(data)
+    });
+});
+
+
+
+
+
 
 userName.onblur = validateFunc;
 password.onblur = validateFunc;
 accept.onclick = validateFunc;
-male.onclick = validateFunc;
-female.onclick = validateFunc;
+
 
 btn.addEventListener("click", (e) => {
     e.preventDefault();
     validateFunc();
-    let data = {};
-    let form = document.forms.registration_form;
-    // data.name = userName.value;
-    // data.password = password.value;
-    // data.country = getCountry();
-    // data.sex = getSex();
-    // data.accept = accept.value;
-    // function getCountry() {
-    // for(i=0; i<form.country.length; i++) {
-    //     if (form.country[i].checked) {
-    //         return form.country[i];
-    //     }
-    // }
-    // };
-    // function getSex() {
-    //     for(i=0; i<form.sex.length; i++) {
-    //         if (form.sex[i].checked) {
-    //             return form.sex[i];
-    //         }
-    //     }
-    //     };
-console.log(form.country)
-
+    console.log('work!')
+   
 })
