@@ -11,59 +11,64 @@
     <title>REGISTRATION</title>
 </head>
 <body>
+    <div class="main-wrapper">
     <div class="registration">
-    <form action="">
+    <form action="" name="registration_form">
         <h1 class="title">
             Create a new account
         </h1>
         <div class="fields">
 <div class="registration_group">
-    <input class="registration_input" type="text" placeholder="Name">
-    <label for="" class="registration_label"><span><img src="./images/email-icon 1.svg" alt="email-icon" ></span></label>
+    <input class="registration_input" type="text" placeholder="Name" id="Name" name="Name" value="">
+    <span class="error-message-name"></span>
+    <label for="Name" class="registration_label"><span><img src="./images/email-icon 1.svg" alt="email-icon" ></span></label>
 </div>
 <div class="registration_group">
-    <input class="registration_input" type="password" name="" id="" placeholder="Password">
-    <label for="" class="registration_label"><span><img src="./images/password-icon 1.svg" alt="password-icon"></span></label>
+    <input class="registration_input" type="password" name="Password" id="Password" placeholder="Password" value="">
+    <span class="error-message-password"></span>
+    <label for="Password" class="registration_label"><span><img src="./images/password-icon 1.svg" alt="password-icon"></span></label>
 </div>
 <div class="registration_group">
        <div class="select-box">
            <div class="options-container" id="options-container">
                <div class="option">
-                   <input type="radio" class="radio" id="Ukraine" name="Country">
+                   <input type="radio" class="radio" id="Ukraine" value="Ukraine" name="Country">
                    <label for="Ukraine">Ukraine</label>
                </div>
                <div class="option">
-                <input type="radio" class="radio" id="Russia" name="Country">
+                <input type="radio" class="radio" id="Russia" value="Russia" name="Country">
                 <label for="Russia">Russia</label>
             </div>
             <div class="option">
-                <input type="radio" class="radio" id="Belarus" name="Country">
+                <input type="radio" class="radio" id="Belarus" value="Belarus" name="Country">
                 <label for="Belarus">Belarus</label>
             </div>
            </div>
            <div class="selected" id="selected">
             Country
          </div>
+                <span class="error-message-country"></span>
        </div>
 </div>
 </div>
 <div class="buttons">
 <div class="registration_group">
-    <input class="registration_radio" type="radio" name="male" id="">
-    <label for="" class="registration_label">Male</label>
+    <input class="registration_radio" type="radio" name="sex" value="male" id="male">
+    <label for="male" class="registration_label">Male</label>
 </div>
 <div class="registration_group">
-    <input class="registration_radio" type="radio" name="male" id="">
-    <label for="" class="registration_label">Female</label>
+    <input class="registration_radio" type="radio" name="sex" value="female" id="female">
+    <label for="female" class="registration_label">Female</label>
 </div>
 <div class="registration_group_checkbox">
-    <input class="registration_checkbox" type="checkbox" name="accept" id="">
-    <label for="" class="registration_label">Accept terms and conditions</label>
+    <input class="registration_checkbox" type="checkbox" name="accept" id="accept">
+    <label for="accept" class="registration_label">Accept <a>terms</a> and <a>conditions</a></label>
 </div>
-
-<button class="registration_button">Sign up</button>
+<span class="error-message-radio"></span>
+<button class="registration_button" disabled>Sign up</button>
 </div>
     </form>
+</div>
 </div>
 <script src="./index.js"></script>
 </body>

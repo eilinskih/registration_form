@@ -1,0 +1,35 @@
+@import 'colors';
+.select-box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    position: absolute;
+    z-index: 10;
+    .options-container {
+        background-color: $input-background;
+        max-height: 0;
+        opacity: 0;
+        width: 100%;
+        transition: all 0.5s;
+        border-radius: 10px;
+        overflow: hidden;
+        order: 1;
+    }
+    .active {
+        max-height: 200px;
+        opacity: 1;
+    }
+    .option {
+        padding: 12px 24px;
+        cursor: pointer;
+        .radio {
+            display: none;
+        }
+    }
+    .option:hover {
+        background-color: $disabled;
+    }
+    .label {
+        cursor: pointer;
+    }
+}
