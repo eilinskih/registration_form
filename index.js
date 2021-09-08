@@ -11,80 +11,79 @@ const female = document.getElementById('female');
 const sex = document.getElementsByClassName('sex')[0];
 const eye = document.getElementById("eye");
 let data = {};
+//Common validators
+function Validator(fieldName, errClass, errMessage) {
+    fieldName.classList.add("error");
+    const err = new Error(errMessage);
+    document.getElementsByClassName(errClass)[0].innerHTML = `Error: ${err.message}`;
+};
+function successValidate(errClass, fieldName) {
+    document.getElementsByClassName(errClass)[0].innerHTML = "";
+    fieldName.classList.remove("error");
+};
 //Validators
 function userNameValidate(userName, minLength) {
-    let nameLength = userName.value.length;
-    if (nameLength == 0) {
-        document.getElementById('Name').classList.add("error");
-        let err = new Error("field is required");
-        document.getElementsByClassName("error-message-name")[0].innerHTML = `Error: ${err.message}`;
+    const nameLength = userName.value.length;
+    const errorClass = "error-message-name"
+    if (nameLength === 0) {
+        Validator(userName, errorClass,"field is required" )
         return false;
     }
     else if (nameLength <= minLength) {
-        document.getElementById('Name').classList.add("error");
-        let err = new Error(`field must includes more than ${minLength} symbols`);
-        document.getElementsByClassName("error-message-name")[0].innerHTML = `Error: ${err.message}`;
+Validator(userName, errorClass, `field must includes more than ${minLength} symbols`)
         return false;
     }
-    document.getElementsByClassName("error-message-name")[0].innerHTML = "";
-    document.getElementById('Name').classList.remove("error");
+    successValidate(errorClass, userName)
     return true
 };
 
 function passwordValidate(password) {
-    let passwordLength = password.value.length;
-    let rule = /^[a-z0-9]+$/ && /[a-z]/ && /[0-9]/;
+    const passwordLength = password.value.length;
+    const errorClass = "error-message-password"
+    const rule = /^[a-z0-9]+$/ && /[a-z]/ && /[0-9]/;
     if (passwordLength == 0) {
-        document.getElementById('Password').classList.add("error");
-        let err = new Error("field is required");
-        document.getElementsByClassName("error-message-password")[0].innerHTML = `Error: ${err.message}`;
+       Validator(password, errorClass, "field is required")
         return false;
     }
     else if (!password.value.match(rule)) {
-        document.getElementById('Password').classList.add("error");
-        let err = new Error("field must includes letters and numbers");
-        document.getElementsByClassName("error-message-password")[0].innerHTML = `Error: ${err.message}`;
+        Validator(password, errorClass, "field must includes letters and numbers")
         return false;
     }
-    document.getElementsByClassName("error-message-password")[0].innerHTML = "";
-    document.getElementById('Password').classList.remove("error");
+    successValidate(errorClass, password)
     return true;
 };
 
 function countryValidate(ukr, rus, bel) {
-    if ((ukr.checked == false) && (rus.checked == false) && (bel.checked == false)) {
-        document.getElementsByClassName('select-box')[0].classList.add("error");
-        let err = new Error("at least 1 country must be checked");
-        document.getElementsByClassName("error-message-country")[0].innerHTML = `Error: ${err.message}`;
+    let selectBox = document.getElementsByClassName('select-box')[0];
+    let errorClass = "error-message-country";
+    if ((ukr.checked === false) && (rus.checked === false) && (bel.checked === false)) {
+        Validator(selectBox, errorClass, "at least 1 country must be checked")
         return false;
     } else {
-        document.getElementsByClassName("error-message-country")[0].innerHTML = "";
-        document.getElementsByClassName('select-box')[0].classList.remove("error");
+       successValidate(errorClass, selectBox)
         return true;
     }
 };
 
 function sexValidate(male, female) {
+    const buttonsBox = document.getElementsByClassName('buttons')[0];
+    const errorClass = "error-message-radio";
     if (!male.checked && !female.checked) {
-        document.getElementsByClassName('buttons')[0].classList.add("error");
-        let err = new Error("select male/female");
-        document.getElementsByClassName("error-message-radio")[0].innerHTML = `Error: ${err.message}`;
+        Validator(buttonsBox, errorClass, "select male/female")
         return false;
     }
-    document.getElementsByClassName("error-message-radio")[0].innerHTML = "";
-    document.getElementsByClassName('buttons')[0].classList.remove("error");
+   successValidate(errorClass, buttonsBox)
     return true;
 };
 
 function acceptValidate(accept) {
+    const buttonsBox = document.getElementsByClassName('buttons')[0]; 
+    const errorClass = "error-message-radio";
     if (!accept.checked) {
-        document.getElementsByClassName('buttons')[0].classList.add("error");
-        let err = new Error("please, accept terms and conditions");
-        document.getElementsByClassName("error-message-radio")[0].innerHTML = `Error: ${err.message}`;
+        Validator(buttonsBox, errorClass, "please, accept terms and conditions")
         return false;
     }
-    document.getElementsByClassName("error-message-radio")[0].innerHTML = "";
-    document.getElementsByClassName('buttons')[0].classList.remove("error");
+    successValidate(errorClass, buttonsBox)
     return true;
 };
 //Valilidate function
@@ -135,12 +134,11 @@ Array.from(sex.getElementsByClassName("registration_group")).forEach(sex => {
     });
 });
 
-userName.onblur = validateFunc;
-password.onblur = validateFunc;
-accept.onclick = validateFunc;
+userName.addEventListener("blur", validateFunc);
+password.addEventListener("blur", validateFunc);
+accept.addEventListener("blur", validateFunc);
 //Send data & reset form handler
-btn.addEventListener("click", (e) => {
-    e.preventDefault();
+function onSendHandler() {
     validateFunc();
     data.name = userName.value;
     data.password = password.value;
@@ -160,4 +158,5 @@ btn.addEventListener("click", (e) => {
                 validateFunc();
         });
         btn.classList.remove("success");
-})
+}
+btn.addEventListener("click", onSendHandler)
