@@ -1,3 +1,4 @@
+//Global variables
 const selected = document.getElementById("selected");
 const optionsContainer = document.getElementById("options-container");
 const optionList = Array.from(document.getElementsByClassName("option"));
@@ -8,9 +9,9 @@ const accept = document.getElementById('accept');
 const male = document.getElementById('male');
 const female = document.getElementById('female');
 const sex = document.getElementsByClassName('sex')[0];
+const eye = document.getElementById("eye");
 let data = {};
-
-
+//Validators
 function userNameValidate(userName, minLength) {
     let nameLength = userName.value.length;
     if (nameLength == 0) {
@@ -28,7 +29,7 @@ function userNameValidate(userName, minLength) {
     document.getElementsByClassName("error-message-name")[0].innerHTML = "";
     document.getElementById('Name').classList.remove("error");
     return true
-}
+};
 
 function passwordValidate(password) {
     let passwordLength = password.value.length;
@@ -48,7 +49,7 @@ function passwordValidate(password) {
     document.getElementsByClassName("error-message-password")[0].innerHTML = "";
     document.getElementById('Password').classList.remove("error");
     return true;
-}
+};
 
 function countryValidate(ukr, rus, bel) {
     if ((ukr.checked == false) && (rus.checked == false) && (bel.checked == false)) {
@@ -60,9 +61,8 @@ function countryValidate(ukr, rus, bel) {
         document.getElementsByClassName("error-message-country")[0].innerHTML = "";
         document.getElementsByClassName('select-box')[0].classList.remove("error");
         return true;
-
     }
-}
+};
 
 function sexValidate(male, female) {
     if (!male.checked && !female.checked) {
@@ -74,7 +74,7 @@ function sexValidate(male, female) {
     document.getElementsByClassName("error-message-radio")[0].innerHTML = "";
     document.getElementsByClassName('buttons')[0].classList.remove("error");
     return true;
-}
+};
 
 function acceptValidate(accept) {
     if (!accept.checked) {
@@ -86,8 +86,8 @@ function acceptValidate(accept) {
     document.getElementsByClassName("error-message-radio")[0].innerHTML = "";
     document.getElementsByClassName('buttons')[0].classList.remove("error");
     return true;
-}
-
+};
+//Valilidate function
 function validateFunc() {
 
     const ukr = document.getElementById("Ukraine");
@@ -100,17 +100,23 @@ function validateFunc() {
                 if (sexValidate(male, female)) {
                     if (acceptValidate(accept)) {
                         btn.removeAttribute("disabled");
+                        btn.classList.add("success");
                     }
                 }
             }
         }
     }
 };
-
+//password visibility handler
+eye.addEventListener('click', (e) => {
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+});
+//Menu handler
 selected.addEventListener("click", () => {
     optionsContainer.classList.toggle("active");
 });
-
+//Select group handler
 optionList.forEach(option => {
     option.addEventListener("click", (e) => {
         validateFunc();
@@ -118,33 +124,40 @@ optionList.forEach(option => {
         selected.innerHTML = countrySelected;
         optionsContainer.classList.remove("active");
         data.country = countrySelected;
-        console.log(data)
     });
 });
-
+// Radio handler
 Array.from(sex.getElementsByClassName("registration_group")).forEach(sex => {
     sex.addEventListener("click", (e) => {
         validateFunc();
         let sexSelected = sex.getElementsByTagName("input")[0].value;
-        selected.innerHTML = sexSelected;
         data.sex = sexSelected;
-        console.log(data)
     });
 });
-
-
-
-
-
 
 userName.onblur = validateFunc;
 password.onblur = validateFunc;
 accept.onclick = validateFunc;
-
-
+//Send data & reset form handler
 btn.addEventListener("click", (e) => {
     e.preventDefault();
     validateFunc();
-    console.log('work!')
-   
+    data.name = userName.value;
+    data.password = password.value;
+    data.accept = accept.value;
+    localStorage.setItem("data", JSON.stringify(data))
+    btn.setAttribute("disabled", "disabled");
+    userName.value = "";
+    password.value = "";
+    optionList.forEach(option => {
+        option.getElementsByTagName("input")[0].checked = false;
+            selected.innerHTML = "Country"
+            optionsContainer.classList.remove("active");
+             validateFunc();
+        });
+        Array.from(sex.getElementsByClassName("registration_group")).forEach(sex => {              
+                sex.getElementsByTagName("input")[0].checked = false;
+                validateFunc();
+        });
+        btn.classList.remove("success");
 })

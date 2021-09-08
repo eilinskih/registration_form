@@ -26,6 +26,12 @@ body {
 .registration_group {
     position: relative;
     margin-bottom: 50px;
+    .eye {
+        position: absolute;
+        top: 15px;
+        right: 30px;
+        cursor: pointer;
+    }
 }
 .buttons {
     display: flex;
@@ -34,6 +40,12 @@ body {
     align-items: flex-end;
     width: 100%;
     margin-top: 150px;
+    .sex {
+        display: flex;
+        .registration_group {
+            margin-right: 10px;
+        }
+    }
     .registration_group {
         margin-bottom: 50px;
     }
@@ -53,6 +65,21 @@ body {
     font-size: 14px;
     box-sizing: border-box;
 }
+.registration_input.error{
+    width: 100%;
+    padding: 15px 0 15px 50px;
+    border-radius: 10px;
+    border: $error 2px solid;
+    background-color: $input-background;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.registration_input.error:focus {
+    border: $error 2px solid;
+}
+.registration_input.error ~ span {
+    color: $error;
+}
 .registration_label {
     position: absolute;
     top: 15px;
@@ -70,12 +97,18 @@ body {
     color: #FFFFFF;
     font-size: 18px;
 }
+.registration_button.success {
+    width: 100%;
+    padding: 15px 0 15px 0;
+    border-radius: 20px;
+    border: none;
+    background-color: $success;
+    color: #FFFFFF;
+    font-size: 18px;
+}
 .error-message-country {
     position: absolute;
     top: 50px;
-}
-.success {
-    text-align: center;
 }
 .selected {
     padding: 12px 24px;
@@ -85,6 +118,9 @@ body {
     margin-bottom: 10px;
     position: relative;
     order: 0;
+}
+.selected ~ span {
+    color: $error;
 }
 .selected::after {
     content: "";
@@ -99,7 +135,6 @@ body {
     opacity: 0.7;
     transition: all 0.4s;
 }
-
 .select-box .options-container.active + .selected::after {
     transform-origin: center;
     transform: rotate(180deg);
