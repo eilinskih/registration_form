@@ -1,0 +1,58 @@
+@import 'colors';
+.select-box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    position: absolute;
+    z-index: 10;
+    .selected {
+        padding: 12px 24px;
+        cursor: pointer;
+        background: $input-background;
+        border: $disabled 1px solid;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        position: relative;
+        order: 0;
+    }
+    .selected::after {
+        content: "";
+        background: url("./../images/expand-button.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        right: 30px;
+        top: 15px;
+        opacity: 0.7;
+        transition: all 0.4s;
+    }
+    .options-container {
+        background-color: $input-background;
+        max-height: 0;
+        opacity: 0;
+        width: 100%;
+        transition: all 0.5s;
+        border-radius: 10px;
+        overflow: hidden;
+        order: 1;
+    }
+    .active {
+        max-height: 200px;
+        opacity: 1;
+    }
+    .option {
+        padding: 12px 24px;
+        cursor: pointer;
+        .radio {
+            display: none;
+        }
+    }
+    .option:hover {
+        background-color: $disabled;
+    }
+    .label {
+        cursor: pointer;
+    }
+}
