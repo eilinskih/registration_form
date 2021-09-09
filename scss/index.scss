@@ -16,20 +16,22 @@ body {
 .registration {
     width: 400px;
     background-color: #ffffff;
-    border-radius: 15px;
+    border-radius: 8px;
     padding: 50px 26px 55px 26px;
+    box-sizing: border-box;
     .title {
         text-align: center;
         font-size: 28px;
         font-weight: 400;
+        margin: 0 0 55px 0;
     }
     .registration_group {
         position: relative;
-        margin-bottom: 50px;
+        margin-bottom: 36px;
         .eye {
             position: absolute;
             top: 15px;
-            right: 30px;
+            right: 11px;
             cursor: pointer;
         }
     }
@@ -39,15 +41,22 @@ body {
         margin-bottom: 5px;
         align-items: flex-end;
         width: 100%;
-        margin-top: 150px;
+        margin-top: 118px;
+        font-size: 13px;
         .sex {
             display: flex;
+
             .registration_group {
-                margin-right: 10px;
+                margin-right: 25px;
+                display: flex;
+                align-items: center;
+                input {
+                    margin-right: 5px;
+                }
             }
         }
         .registration_group {
-            margin-bottom: 50px;
+            margin-bottom: 35px;
         }
         .registration_label {
             position: static;
@@ -65,8 +74,8 @@ body {
     }
     .registration_input {
         width: 100%;
-        padding: 15px 0 15px 50px;
-        border-radius: 10px;
+        padding: 14px 0 14px 35px;
+        border-radius: 8px;
         border: $disabled 1px solid;
         background-color: $input-background;
         font-size: 14px;
@@ -96,7 +105,7 @@ body {
     .registration_label {
         position: absolute;
         top: 15px;
-        left: 15px;
+        left: 10px;
         z-index: 0;
         color: $labels;
         transition: 0.3s;
